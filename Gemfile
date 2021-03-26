@@ -44,3 +44,5 @@ gem 'mimemagic', '0.3.5'
 
 
 gem "jwt", "~> 2.2"
+# gem 'rest-client', '~> 2.1'
+gem 'amadeus' 
