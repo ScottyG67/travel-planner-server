@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
     skip_before_action :authorized, only: [:create]
 
     def profile
-        render json: @user, only: [:first_name, :last_name, :username], status: :accepted
+        render json: @user, only: [:id, :first_name, :last_name, :username], status: :accepted
     end
     
     def create
