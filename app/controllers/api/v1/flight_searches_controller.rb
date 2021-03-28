@@ -21,6 +21,27 @@ class Api::V1::FlightSearchesController < ApplicationController
 
     end
 
+    def search
+        
+
+        body = {
+            currencyCode: "USD", 
+            originLocationCode: 'AUS', 
+            destinationLocationCode: 'SFO', 
+            departureDate: '2021-05-01', 
+            returnDate:'2021-05-10', 
+            adults: 1,
+            max: 10
+        }
+    
+    
+        amadeus = Amadeus::Client.new(client_id: 'MHCEX9RKb0ATGhbHiGchYp67ROsIKbgl', client_secret: 'pAAiFfnhgWByhoAm')
+        response = amadeus.shopping.flight_offers_search.get(body)
+    
+        render json: response.result
+
+    end
+
 
 
     private
