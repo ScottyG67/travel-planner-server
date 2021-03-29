@@ -21,17 +21,20 @@ class Api::V1::UsersController < ApplicationController
     def save_flight
         
         save_flight = Flight.new
-        save_flight.type = params["type"]
-        save_flight.source = params["source"]
-        save_flight.instantTicketingRequired = params["instantTicketingRequired"]
-        save_flight.nonHomogeneous = params["nonHomogeneous"]
-        save_flight.oneWay = params["oneWay"]
-        save_flight.lastTicketingDate = params["lastTicketingDate"]
-        save_flight.itineraries = params["itineraries"]
-        save_flight.price = params["price"]
-        save_flight.pricingOptions = params["pricingOptions"]
-        save_flight.validatingAirlineCodes = params["validatingAirlineCodes"]
-        save_flight.travelerPricings = params["travelerPricings"]
+        save_flight.type = params['flight']["type"]
+        save_flight.source = params['flight']["source"]
+        save_flight.instantTicketingRequired = params['flight']["instantTicketingRequired"]
+        save_flight.nonHomogeneous = params['flight']["nonHomogeneous"]
+        save_flight.oneWay = params['flight']["oneWay"]
+        save_flight.lastTicketingDate = params['flight']["lastTicketingDate"]
+        save_flight.itineraries = params['flight']["itineraries"]
+        save_flight.price = params['flight']["price"]
+        save_flight.pricingOptions = params['flight']["pricingOptions"]
+        save_flight.validatingAirlineCodes = params['flight']["validatingAirlineCodes"]
+        save_flight.travelerPricings = params['flight']["travelerPricings"]
+
+        trip = Trip.find_by(id: params['trip'])
+        save_flight.trip = trip
 
         if save_flight.save
             render json: save_flight
