@@ -27,13 +27,27 @@ class Api::V1::TripsController < ApplicationController
 
     end
 
-    def edit
-        byebug
+    def update
+        
+        trip = Trip.find_by(id: params['trip']['id'])
+        trip.name = params['trip']['name']
+        trip.description = params['trip']['description']
+        trip.image = params['trip']['image']
+        
+        if trip.save
+            render json: trip
+        else
+            render json: {error: 'failed to save'}
+        end
 
     end
 
-    def delete
-        byebug
+    def destroy
+
+        trip = Trip.find_by(id: params['id'])
+        trip.destroy
+        render json: trip
+
     end
 
 
