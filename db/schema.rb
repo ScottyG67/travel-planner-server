@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_032938) do
+ActiveRecord::Schema.define(version: 2021_03_29_143900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 2021_03_29_032938) do
     t.json "travelerPricings"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "trip_id", null: false
+    t.index ["trip_id"], name: "index_flights_on_trip_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +53,6 @@ ActiveRecord::Schema.define(version: 2021_03_29_032938) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "flights", "trips"
+  add_foreign_key "trips", "users"
 end
