@@ -22,14 +22,13 @@ class Api::V1::FlightSearchesController < ApplicationController
     end
 
     def search
-        
 
         body = {
             currencyCode: "USD", 
-            originLocationCode: 'AUS', 
-            destinationLocationCode: 'SFO', 
-            departureDate: '2021-05-01', 
-            returnDate:'2021-05-10', 
+            originLocationCode: params["searchTerm"]["depart"], 
+            destinationLocationCode: params["searchTerm"]["arrive"], 
+            departureDate: params["searchTerm"]["startDate"].slice(0,10), 
+            returnDate: params["searchTerm"]["endDate"].slice(0,10), 
             adults: 1,
             max: 10
         }
