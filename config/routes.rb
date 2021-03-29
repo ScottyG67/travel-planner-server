@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
       resources :flight_searches
+      post '/search_flights', to: 'flight_searches#search'
     end
   end
 
