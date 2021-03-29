@@ -6,7 +6,7 @@ class Api::V1::AuthController < ApplicationController
         if @user && @user.authenticate(user_login_params[:password])
             #.authenticate from BCrypt
             token = encode_token({ user_id: @user.id })
-            render json: { user: @user.to_json(only: [:first_name, :last_name, :username]), jwt: token }, status: :accepted
+            render json: { user: @user.to_json(only: [:first_name, :last_name, :username, :id]), jwt: token }, status: :accepted
         else
             render json: {message: "Invalid username or password"}, status: :unauthorized
         end   

@@ -41,6 +41,12 @@ class Api::V1::FlightSearchesController < ApplicationController
 
     end
 
+    def Create 
+        byebug
+
+
+    end
+
 
 
     private
