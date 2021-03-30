@@ -1,25 +1,18 @@
-class Api::V1::UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create]
+class Api::V1::FlightsController < ApplicationController
 
-    def profile
-        render json: @user, only: [:id, :first_name, :last_name, :username], status: :accepted
+    def index
     end
-    
+
+    def show
+    end
+
+    def destroy
+        byebug
+
+    end
+
+
     def create
-        @user = User.create(user_params)
-        
-        if @user.valid?
-            @token = encode_token(user_id: @user.id)
-            # render json: user, only: [:first_name, :last_name, :username], status: :created
-            render json: { user: @user.to_json(only: [:first_name, :last_name, :username, :id]), jwt: @token}, status: :created
-        else
-            render json: {error: 'failed to create user'}, status: :not_acceptable
-        end
-
-    end
-
-    def save_flight
-        
         save_flight = Flight.new
         save_flight.source = params['flight']["source"]
         save_flight.instantTicketingRequired = params['flight']["instantTicketingRequired"]
@@ -43,10 +36,10 @@ class Api::V1::UsersController < ApplicationController
     
     end
 
-    private
+    def trip_flights
+        trip = Trip.find_by(id: params["id"])
+        render json: trip.flights
 
-    def user_params
-        params.require(:user).permit(:first_name, :last_name, :username, :password)
     end
 
 end

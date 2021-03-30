@@ -4,12 +4,12 @@ class Api::V1::TripsController < ApplicationController
         
         trips = User.find_by(id: params["user_id"]).trips
         render json: trips
+        # render :json => trips.to_json(:include => :flights)
 
     end
 
     def show
         byebug
-
     end
 
     def create

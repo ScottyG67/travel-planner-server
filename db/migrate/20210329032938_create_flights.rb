@@ -1,7 +1,6 @@
 class CreateFlights < ActiveRecord::Migration[6.1]
   def change
     create_table :flights do |t|
-      t.string :type
       t.string :source
       t.boolean :instantTicketingRequired
       t.boolean :nonHomogeneous

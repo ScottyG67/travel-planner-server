@@ -16,7 +16,6 @@ ActiveRecord::Schema.define(version: 2021_03_29_143900) do
   enable_extension "plpgsql"
 
   create_table "flights", force: :cascade do |t|
-    t.string "type"
     t.string "source"
     t.boolean "instantTicketingRequired"
     t.boolean "nonHomogeneous"
