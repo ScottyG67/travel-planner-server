@@ -18,30 +18,30 @@ class Api::V1::UsersController < ApplicationController
 
     end
 
-    def save_flight
+    # def save_flight
         
-        save_flight = Flight.new
-        save_flight.source = params['flight']["source"]
-        save_flight.instantTicketingRequired = params['flight']["instantTicketingRequired"]
-        save_flight.nonHomogeneous = params['flight']["nonHomogeneous"]
-        save_flight.oneWay = params['flight']["oneWay"]
-        save_flight.lastTicketingDate = params['flight']["lastTicketingDate"]
-        save_flight.itineraries = params['flight']["itineraries"]
-        save_flight.price = params['flight']["price"]
-        save_flight.pricingOptions = params['flight']["pricingOptions"]
-        save_flight.validatingAirlineCodes = params['flight']["validatingAirlineCodes"]
-        save_flight.travelerPricings = params['flight']["travelerPricings"]
+    #     save_flight = Flight.new
+    #     save_flight.source = params['flight']["source"]
+    #     save_flight.instantTicketingRequired = params['flight']["instantTicketingRequired"]
+    #     save_flight.nonHomogeneous = params['flight']["nonHomogeneous"]
+    #     save_flight.oneWay = params['flight']["oneWay"]
+    #     save_flight.lastTicketingDate = params['flight']["lastTicketingDate"]
+    #     save_flight.itineraries = params['flight']["itineraries"]
+    #     save_flight.price = params['flight']["price"]
+    #     save_flight.pricingOptions = params['flight']["pricingOptions"]
+    #     save_flight.validatingAirlineCodes = params['flight']["validatingAirlineCodes"]
+    #     save_flight.travelerPricings = params['flight']["travelerPricings"]
 
-        trip = Trip.find_by(id: params['trip'])
-        save_flight.trip = trip
+    #     trip = Trip.find_by(id: params['trip'])
+    #     save_flight.trip = trip
 
-        if save_flight.save
-            render json: save_flight
-        else
-            render json: {error: 'failed to save'}
-        end
+    #     if save_flight.save
+    #         render json: save_flight
+    #     else
+    #         render json: {error: 'failed to save'}
+    #     end
     
-    end
+    # end
 
     private
 

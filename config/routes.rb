@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       end
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
-      post '/users/:id/saveflight', to: 'users#save_flight'
+      # post '/users/:id/saveflight', to: 'users#save_flight'
       # resources :flight_searches
       post '/search_flights', to: 'flight_searches#search'
       get '/users/:id/trips/:id/flights', to: 'flights#trip_flights'

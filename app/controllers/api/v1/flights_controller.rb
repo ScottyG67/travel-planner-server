@@ -7,7 +7,9 @@ class Api::V1::FlightsController < ApplicationController
     end
 
     def destroy
-        byebug
+        flight = Flight.find_by(id: params['id'])
+        flight.destroy
+        render json: flight
 
     end
 
@@ -24,9 +26,11 @@ class Api::V1::FlightsController < ApplicationController
         save_flight.pricingOptions = params['flight']["pricingOptions"]
         save_flight.validatingAirlineCodes = params['flight']["validatingAirlineCodes"]
         save_flight.travelerPricings = params['flight']["travelerPricings"]
+        
 
         trip = Trip.find_by(id: params['trip'])
         save_flight.trip = trip
+        
 
         if save_flight.save
             render json: save_flight
@@ -40,6 +44,12 @@ class Api::V1::FlightsController < ApplicationController
         trip = Trip.find_by(id: params["id"])
         render json: trip.flights
 
+    end
+
+    private
+
+    def flight_params
+        params.require('flight').permit('source','instantTicketingRequired','nonHomogeneous','oneWay','lastTicketingDate','itineraries','price','pricingOptions','validatingAirlineCodes','travelerPricings')
     end
 
 end
