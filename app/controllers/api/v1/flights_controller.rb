@@ -13,17 +13,17 @@ class Api::V1::FlightsController < ApplicationController
 
 
     def create
-        save_flight = Flight.new
-        save_flight.source = params['flight']["source"]
-        save_flight.instantTicketingRequired = params['flight']["instantTicketingRequired"]
-        save_flight.nonHomogeneous = params['flight']["nonHomogeneous"]
-        save_flight.oneWay = params['flight']["oneWay"]
-        save_flight.lastTicketingDate = params['flight']["lastTicketingDate"]
-        save_flight.itineraries = params['flight']["itineraries"]
-        save_flight.price = params['flight']["price"]
-        save_flight.pricingOptions = params['flight']["pricingOptions"]
-        save_flight.validatingAirlineCodes = params['flight']["validatingAirlineCodes"]
-        save_flight.travelerPricings = params['flight']["travelerPricings"]
+        save_flight = Flight.new(flight_params)
+        # save_flight.source = params['flight']["source"]
+        # save_flight.instantTicketingRequired = params['flight']["instantTicketingRequired"]
+        # save_flight.nonHomogeneous = params['flight']["nonHomogeneous"]
+        # save_flight.oneWay = params['flight']["oneWay"]
+        # save_flight.lastTicketingDate = params['flight']["lastTicketingDate"]
+        # save_flight.itineraries = params['flight']["itineraries"]
+        # save_flight.price = params['flight']["price"]
+        # save_flight.pricingOptions = params['flight']["pricingOptions"]
+        # save_flight.validatingAirlineCodes = params['flight']["validatingAirlineCodes"]
+        # save_flight.travelerPricings = params['flight']["travelerPricings"]
 
         trip = Trip.find_by(id: params['trip'])
         save_flight.trip = trip
@@ -40,6 +40,12 @@ class Api::V1::FlightsController < ApplicationController
         trip = Trip.find_by(id: params["id"])
         render json: trip.flights
 
+    end
+
+    private 
+
+    def flight_params
+        params.require('flight').permit('source','instantTicketingRequired','nonHomogeneous','oneWay','lastTicketingDate','itineraries','price','pricingOptions','validatingAirlineCodes','travelerPricings')
     end
 
 end
